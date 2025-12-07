@@ -49,7 +49,7 @@
         "test:typos": "peck",
         "test:lint": "pint --test",
         "test:unit": "pest --coverage --exactly=100",
-        "test:types": "phpstan",
+        "test:types": "phpstan --memory-limit=2G analyse",
         "test:refactor": "rector --dry-run",
         "test": [
             "@test:lint",

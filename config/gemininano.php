@@ -8,7 +8,8 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'base_url' => env('GEMINI_NANO_URL', 'http://localhost:8001'),
+    'base_url' => env('GEMINI_NANO_URL', 'https://generativelanguage.googleapis.com'),
+    'model' => env('GEMINI_NANO_MODEL', 'gemini-2.5-flash-image'),
     'api_key' => env('GEMINI_NANO_KEY'),
     'timeout' => env('GEMINI_NANO_TIMEOUT', 60),
 
