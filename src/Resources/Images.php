@@ -2,22 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Noxsi\LaravelGemininano\Resources;
+namespace Noxsi\GeminiNano\Resources;
 
 use Illuminate\Support\Facades\Http;
-use Noxsi\LaravelGemininano\Client;
-use Noxsi\LaravelGemininano\Responses\Images\GenerateResponse;
+use Noxsi\GeminiNano\Client;
+use Noxsi\GeminiNano\Responses\Images\GenerateResponse;
 use RuntimeException;
 
 final readonly class Images
 {
     public function __construct(
         private Client $client,
-    ) {
-    }
+    ) {}
 
     /**
-     * @param array<string, mixed> $options
+     * @param  array<string, mixed>  $options
      */
     public function generate(string $prompt, array $options = []): GenerateResponse
     {
@@ -30,7 +29,6 @@ final readonly class Images
             ->timeout($this->client->timeout)
             ->withToken($this->client->apiKey);
 
-        // TODO: Endpunkt an dein Banana-Backend anpassen:
         $response = $http->post('/v1/generate-image', $payload);
 
         if ($response->failed()) {

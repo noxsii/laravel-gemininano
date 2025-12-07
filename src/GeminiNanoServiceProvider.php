@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Noxsi\LaravelGemininano;
+namespace Noxsi\GeminiNano;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -15,7 +15,7 @@ class GeminiNanoServiceProvider extends ServiceProvider
             'gemininano'
         );
 
-        $this->app->singleton(Client::class, fn(): \Noxsi\LaravelGemininano\Client => Client::factory()->make());
+        $this->app->singleton(Client::class, fn (): Client => Client::factory()->make());
     }
 
     public function boot(): void

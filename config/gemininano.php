@@ -9,7 +9,7 @@ return [
     */
 
     'base_url' => env('GEMINI_NANO_URL', 'http://localhost:8001'),
-    'api_key'  => env('GEMINI_NANO_KEY'),
+    'api_key' => env('GEMINI_NANO_KEY'),
     'timeout' => env('GEMINI_NANO_TIMEOUT', 60),
 
     /*

@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Noxsi\LaravelGemininano;
+namespace Noxsi\GeminiNano;
 
 final class ClientFactory
 {
     private ?string $apiKey = null;
+
     private ?string $baseUrl = null;
+
     private ?int $timeout = null;
 
     public function withApiKey(string $apiKey): self
@@ -36,7 +38,7 @@ final class ClientFactory
         $config = config('gemininano');
 
         $baseUrl = $this->baseUrl ?? $config['base_url'] ?? '';
-        $apiKey  = $this->apiKey  ?? $config['api_key'] ?? '';
+        $apiKey = $this->apiKey ?? $config['api_key'] ?? '';
         $timeout = $this->timeout ?? (int) ($config['timeout'] ?? 60);
 
         return new Client(

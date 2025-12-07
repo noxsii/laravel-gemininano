@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Noxsi\LaravelGemininano\Facades;
+namespace Noxsi\GeminiNano\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Noxsi\LaravelGemininano\Client;
-use Noxsi\LaravelGemininano\Resources\Images;
+use Noxsi\GeminiNano\Client;
+use Noxsi\GeminiNano\Resources\Images;
 
 /**
  * @method static Images images()

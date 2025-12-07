@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Noxsi\LaravelGemininano\Responses\Images;
+namespace Noxsi\GeminiNano\Responses\Images;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -11,9 +11,8 @@ final readonly class GenerateResponse
 {
     public function __construct(
         private string $base64Image,
-        private array  $raw,
-    ) {
-    }
+        private array $raw,
+    ) {}
 
     /**
      * Baue das Response-Objekt aus der API-Response.
