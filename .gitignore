@@ -1,0 +1,27 @@
+# Dependencies
+/vendor/
+# Composer
+composer.lock
+# PHP
+*.log
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Package specific
+*.phar
+
+# PHPStan
+.phpstan/
+
+# Pint
+.pint/
+
+# IDEs and editors
+.idea/
+.vscode/

@@ -1,0 +1,28 @@
+{
+    "name": "dennis/laravel-gemininano",
+    "description": "A Laravel SDK for Gemini Nano / Banana",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Noxsi\\LaravelGemininano\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dennis",
+            "email": "hello@noxsi.de",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+      "php": "^8.4"
+    },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
+}
