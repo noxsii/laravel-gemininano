@@ -63,10 +63,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Noxsi\\LaravelGemininano\\GeminiNanoServiceProvider"
+                "Noxsi\\GeminiNano\\GeminiNanoServiceProvider"
             ],
             "aliases": {
-                "GeminiNano": "Noxsi\\LaravelGemininano\\Facades\\GeminiNano"
+                "GeminiNano": "Noxsi\\GeminiNano\\Facades\\GeminiNano"
             }
         }
     }
