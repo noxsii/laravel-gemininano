@@ -13,9 +13,8 @@ final readonly class GenerateResponse
     public function __construct(
         private string $base64Image,
         /** @var array<string, mixed> */
-        private array  $raw,
-    ) {
-    }
+        private array $raw,
+    ) {}
 
     /**
      * @param  array<string, mixed>  $data
@@ -68,7 +67,6 @@ final readonly class GenerateResponse
     }
 
     /**
-     *
      * @return array<string, mixed>
      */
     public function raw(): array

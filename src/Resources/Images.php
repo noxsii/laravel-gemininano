@@ -5,21 +5,18 @@ declare(strict_types=1);
 namespace Noxsi\GeminiNano\Resources;
 
 use Illuminate\Support\Facades\Http;
+use Noxsi\GeminiNano\Client;
 use Noxsi\GeminiNano\Responses\Images\GenerateResponse;
 use RuntimeException;
-use Noxsi\GeminiNano\Client;
 
 final readonly class Images
 {
     public function __construct(
         private Client $client,
-    ) {
-    }
+    ) {}
 
     /**
-     * @param string $prompt
-     * @param array<string, mixed> $options add fields like generateConfig
-     * @return GenerateResponse
+     * @param  array<string, mixed>  $options  add fields like generateConfig
      */
     public function generate(string $prompt, array $options = []): GenerateResponse
     {
@@ -43,7 +40,7 @@ final readonly class Images
             ->timeout($this->client->timeout)
             ->withHeaders([
                 'x-goog-api-key' => $this->client->apiKey,
-                'Content-Type'   => 'application/json',
+                'Content-Type' => 'application/json',
             ]);
 
         $endpoint = sprintf('/v1beta/models/%s:generateContent', $model);
