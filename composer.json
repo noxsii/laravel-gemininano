@@ -59,5 +59,15 @@
             "@test:types",
             "@test:refactor"
         ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Noxsi\\LaravelGemininano\\GeminiNanoServiceProvider"
+            ],
+            "aliases": {
+                "GeminiNano": "Noxsi\\LaravelGemininano\\Facades\\GeminiNano"
+            }
+        }
     }
 }
