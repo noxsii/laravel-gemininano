@@ -1,8 +1,9 @@
 {
-  "preset": "base",
-  "ignore": {
-    "words": [
-      "php"
-    ]
-  }
+    "preset": "base",
+    "ignore": {
+        "words": [
+            "php",
+            "gemininano"
+        ]
+    }
 }

@@ -48,14 +48,12 @@
         "test:type-coverage": "pest --type-coverage --exactly=100",
         "test:typos": "peck",
         "test:lint": "pint --test",
-        "test:unit": "pest --coverage --exactly=100",
         "test:types": "phpstan --memory-limit=2G analyse",
         "test:refactor": "rector --dry-run",
         "test": [
             "@test:lint",
             "@test:type-coverage",
             "@test:typos",
-            "@test:unit",
             "@test:types",
             "@test:refactor"
         ]

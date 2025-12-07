@@ -30,12 +30,6 @@ final readonly class GenerateResponse
         return new self($base64, $data);
     }
 
-    /**
-     * Holt das Base64-Bild aus der Gemini-Response.
-     *
-     * Struktur laut Doku:
-     * response.candidates[0].content.parts[*].inlineData.data (oder inline_data.data)
-     */
     private static function extractBase64(array $data): ?string
     {
         $parts = $data['candidates'][0]['content']['parts'] ?? null;
