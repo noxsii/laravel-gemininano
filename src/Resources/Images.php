@@ -6,8 +6,8 @@ namespace Noxsi\GeminiNano\Resources;
 
 use Illuminate\Support\Facades\Http;
 use Noxsi\GeminiNano\Client;
+use Noxsi\GeminiNano\Exceptions\GeminiNanoResourceException;
 use Noxsi\GeminiNano\Responses\Images\GenerateResponse;
-use RuntimeException;
 
 final readonly class Images
 {
@@ -30,12 +30,12 @@ final readonly class Images
 
         if ($imagePath !== null) {
             if (! is_readable($imagePath)) {
-                throw new RuntimeException(sprintf('Image file not readable: %s', $imagePath));
+                throw new GeminiNanoResourceException(sprintf('Image file not readable: %s', $imagePath));
             }
 
             $binary = file_get_contents($imagePath);
             if ($binary === false) {
-                throw new RuntimeException(sprintf('Failed to read image file: %s', $imagePath));
+                throw new GeminiNanoResourceException(sprintf('Failed to read image file: %s', $imagePath));
             }
 
             $base64 = base64_encode($binary);
@@ -84,7 +84,7 @@ final readonly class Images
         $response = $http->post($endpoint, $payload);
 
         if ($response->failed()) {
-            throw new RuntimeException(
+            throw new GeminiNanoResourceException(
                 sprintf(
                     'Gemini image generation failed (%s): %s',
                     $response->status(),

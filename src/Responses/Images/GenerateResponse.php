@@ -6,7 +6,7 @@ namespace Noxsi\GeminiNano\Responses\Images;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use RuntimeException;
+use Noxsi\GeminiNano\Exceptions\GeminiNanoImageResponseException;
 
 final readonly class GenerateResponse
 {
@@ -24,7 +24,7 @@ final readonly class GenerateResponse
         $base64 = self::extractBase64($data);
 
         if ($base64 === null || $base64 === '') {
-            throw new RuntimeException('Gemini response did not contain image data.');
+            throw new GeminiNanoImageResponseException('Gemini response did not contain image data.');
         }
 
         return new self($base64, $data);
@@ -82,11 +82,13 @@ final readonly class GenerateResponse
 
         $binary = base64_decode($this->base64Image, true);
         if ($binary === false) {
-            throw new RuntimeException('Failed to decode base64 image data.');
+            throw new GeminiNanoImageResponseException('Failed to decode base64 image data.');
         }
 
-        Storage::disk($disk)->put($path, $binary);
+        $filesystem = Storage::disk($disk);
 
-        return Storage::disk($disk)->url($path);
+        $filesystem->put($path, $binary);
+
+        return $filesystem->url($path);
     }
 }
