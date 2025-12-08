@@ -22,7 +22,9 @@
         "pestphp/pest-plugin-type-coverage": "^4.0.2",
         "phpstan/phpstan": "^2.1.26",
         "rector/rector": "^2.1.7",
-        "symfony/var-dumper": "^7.3.3"
+        "symfony/var-dumper": "^7.3.3",
+        "illuminate/filesystem": "^12.41",
+        "illuminate/http": "^12.41"
     },
     "autoload": {
         "psr-4": {

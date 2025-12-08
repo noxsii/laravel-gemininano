@@ -22,7 +22,7 @@ class GeminiNanoServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/gemininano.php' => config_path('gemininano.php'),
+                __DIR__.'/../config/gemininano.php' => $this->app->basePath('config/gemininano.php'),
             ], 'config');
         }
     }

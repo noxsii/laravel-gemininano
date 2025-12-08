@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Noxsi\GeminiNano\Resources;
 
+use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Noxsi\GeminiNano\Client;
 use Noxsi\GeminiNano\Exceptions\GeminiNanoResourceException;
@@ -70,7 +72,7 @@ final readonly class Images
             $payload = array_merge($payload, $options);
         }
 
-        $model = config('gemininano.model', 'gemini-2.5-flash-image');
+        $model = (string) Config::get('gemininano.model', 'gemini-2.5-flash-image');
 
         $http = Http::baseUrl($this->client->baseUrl)
             ->timeout($this->client->timeout)
@@ -81,6 +83,7 @@ final readonly class Images
 
         $endpoint = sprintf('/v1beta/models/%s:generateContent', $model);
 
+        /** @var Response $response */
         $response = $http->post($endpoint, $payload);
 
         if ($response->failed()) {

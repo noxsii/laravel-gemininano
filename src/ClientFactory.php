@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Noxsi\GeminiNano;
 
+use Illuminate\Support\Facades\Config;
+
 final class ClientFactory
 {
     private ?string $apiKey = null;
@@ -35,7 +37,8 @@ final class ClientFactory
 
     public function make(): Client
     {
-        $config = config('gemininano');
+        /** @var array<string, mixed> $config */
+        $config = (array) Config::get('gemininano');
 
         $baseUrl = $this->baseUrl ?? $config['base_url'] ?? '';
         $apiKey = $this->apiKey ?? $config['api_key'] ?? '';

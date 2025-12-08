@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Noxsi\GeminiNano\Responses\Images;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Noxsi\GeminiNano\Exceptions\GeminiNanoImageResponseException;
@@ -30,6 +31,9 @@ final readonly class GenerateResponse
         return new self($base64, $data);
     }
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     private static function extractBase64(array $data): ?string
     {
         $parts = $data['candidates'][0]['content']['parts'] ?? null;
@@ -42,6 +46,7 @@ final readonly class GenerateResponse
             return null;
         }
 
+        /** @var array<int, array<string, mixed>> $parts */
         foreach ($parts as $part) {
             if (isset($part['inlineData']['data']) && is_string($part['inlineData']['data'])) {
                 return $part['inlineData']['data'];
@@ -70,12 +75,12 @@ final readonly class GenerateResponse
 
     public function result(): string
     {
-        if (! config('gemininano.store')) {
+        if (! Config::get('gemininano.store')) {
             return $this->base64Image;
         }
 
-        $disk = (string) config('gemininano.disk', 'public');
-        $pathPrefix = trim((string) config('gemininano.path', 'gemininano'), '/');
+        $disk = (string) Config::get('gemininano.disk', 'public');
+        $pathPrefix = trim((string) Config::get('gemininano.path', 'gemininano'), '/');
 
         $filename = Str::uuid().'.png';
         $path = $pathPrefix !== '' ? $pathPrefix.'/'.$filename : $filename;
@@ -85,6 +90,7 @@ final readonly class GenerateResponse
             throw new GeminiNanoImageResponseException('Failed to decode base64 image data.');
         }
 
+        /** @var mixed $filesystem */
         $filesystem = Storage::disk($disk);
 
         $filesystem->put($path, $binary);
