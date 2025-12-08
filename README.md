@@ -205,11 +205,54 @@ $options = [
 
 $response = GeminiNano::images()->generate(
     'A neon-lit banana robot in a Gemini-branded bar',
-    $options
+    options: $options,
 );
 
 $image = $response->result();
 ```
+
+### Using an input image (multimodal / inline_data)
+
+You can optionally send an input image along with your text prompt.  
+Internally this builds a payload like:
+
+```json
+{
+  "contents": [
+    {
+      "parts": [
+        {
+          "inline_data": {
+            "mime_type": "image/jpeg",
+            "data": "BASE64_ENCODED_IMAGE"
+          }
+        },
+        {
+          "text": "Caption this image."
+        }
+      ]
+    }
+  ]
+}
+```
+
+Example:
+
+```php
+use Noxsi\GeminiNano\Facades\GeminiNano;
+
+$imagePath = storage_path('app/public/example.jpg');
+
+$response = GeminiNano::images()->generate(
+    prompt: 'Caption this image.',
+    imagePath: $imagePath,
+    imageMimeType: 'image/jpeg', // optional, will be auto-detected if null
+);
+
+$result = $response->result(); // URL or base64 depending on config
+```
+
+> Note: `imagePath` must point to a readable image file. The package will base64-encode the file and send it as `inline_data` to the Gemini API.
 
 ### Returning base64 for an API endpoint
 
@@ -264,7 +307,7 @@ test('it generates an image via gemini nano', function () {
 });
 ```
 
-If you’re testing **the package itself**, you can use Pest + Orchestra Testbench; the package is designed to run in a standard Laravel test environment.
+If you’re testing **the package itself**, you can use Pest; the package is designed to run in a standard Laravel test environment.
 
 ---
 
@@ -286,13 +329,13 @@ In your Laravel app’s `composer.json`:
 
 ```json
 "repositories": [
-  {
-    "type": "path",
-    "url": "../laravel-gemininano",
-    "options": {
-      "symlink": true
-    }
-  }
+{
+"type": "path",
+"url": "../laravel-gemininano",
+"options": {
+"symlink": true
+}
+}
 ]
 ```
 
