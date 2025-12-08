@@ -12,7 +12,6 @@
     ],
     "require": {
         "php": "^8.4.0",
-        "ext-fileinfo": "*",
         "illuminate/filesystem": "^12.41",
         "illuminate/http": "^12.41",
         "illuminate/support": "^12.41"
