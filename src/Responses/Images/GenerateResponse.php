@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Noxsi\GeminiNano\Responses\Images;
 
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -90,7 +91,7 @@ final readonly class GenerateResponse
             throw new GeminiNanoImageResponseException('Failed to decode base64 image data.');
         }
 
-        /** @var mixed $filesystem */
+        /** @var FilesystemAdapter $filesystem */
         $filesystem = Storage::disk($disk);
 
         $filesystem->put($path, $binary);
