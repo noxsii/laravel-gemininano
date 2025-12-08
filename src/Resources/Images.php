@@ -16,16 +16,52 @@ final readonly class Images
     ) {}
 
     /**
-     * @param  array<string, mixed>  $options  add fields like generateConfig
+     * @param  string|null  $imagePath  Absolute or relative path to an image file (optional)
+     * @param  string|null  $imageMimeType  e.g. image/jpeg, image/png (optional; auto-detected if null)
+     * @param  array<string, mixed>  $options  Extra payload fields (generationConfig, safetySettings, ...)
      */
-    public function generate(string $prompt, array $options = []): GenerateResponse
-    {
+    public function generate(
+        string $prompt,
+        ?string $imagePath = null,
+        ?string $imageMimeType = null,
+        array $options = [],
+    ): GenerateResponse {
+        $parts = [];
+
+        if ($imagePath !== null) {
+            if (! is_readable($imagePath)) {
+                throw new RuntimeException(sprintf('Image file not readable: %s', $imagePath));
+            }
+
+            $binary = file_get_contents($imagePath);
+            if ($binary === false) {
+                throw new RuntimeException(sprintf('Failed to read image file: %s', $imagePath));
+            }
+
+            $base64 = base64_encode($binary);
+
+            $mimeType = $imageMimeType;
+            if ($mimeType === null) {
+                $detected = @mime_content_type($imagePath);
+                $mimeType = is_string($detected) ? $detected : 'image/jpeg';
+            }
+
+            $parts[] = [
+                'inline_data' => [
+                    'mime_type' => $mimeType,
+                    'data' => $base64,
+                ],
+            ];
+        }
+
+        $parts[] = [
+            'text' => $prompt,
+        ];
+
         $payload = [
             'contents' => [
                 [
-                    'parts' => [
-                        ['text' => $prompt],
-                    ],
+                    'parts' => $parts,
                 ],
             ],
         ];

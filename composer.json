@@ -1,7 +1,7 @@
 {
     "name": "noxsi/laravel-gemininano",
     "description": "A Repo / SDK for Gemini Nano",
-    "keywords": ["php", "laravel", "gemini"],
+    "keywords": ["php", "laravel", "gemini", "gemini-nano", "image-generator"],
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": "^8.4.0",
-        "illuminate/support": "^12.41"
+        "illuminate/support": "^12.41",
+        "ext-fileinfo": "*"
     },
     "require-dev": {
         "laravel/pint": "^1.24.0",
@@ -33,7 +34,7 @@
             "Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
         "sort-packages": true,
