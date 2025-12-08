@@ -53,12 +53,14 @@
         "test:lint": "pint --test",
         "test:types": "phpstan --memory-limit=2G analyse",
         "test:refactor": "rector --dry-run",
+        "test:unit": "pest",
         "test": [
             "@test:lint",
             "@test:type-coverage",
             "@test:typos",
             "@test:types",
-            "@test:refactor"
+            "@test:refactor",
+            "@test:unit"
         ]
     },
     "extra": {
