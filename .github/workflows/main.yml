@@ -56,6 +56,11 @@ jobs:
             composer update --no-interaction --no-progress
           fi
 
+      - name: Install aspell for Peck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y aspell aspell-en
+
       - name: Run Pint (lint)
         run: composer test:lint
 
